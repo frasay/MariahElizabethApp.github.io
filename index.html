@@ -288,15 +288,34 @@
 <div class="pattern-btn rounded-lg border border-gray-200" data-index="3" style="background-image: url('https://cdn.simulationtheory.ai/gasset/?asset=img&amp;prompt=stars pattern&amp;w=100&amp;h=100&amp;transparent=true&amp;style=pixel_art')"></div>
 </div>
 </div>
-<div class="mt-6"></div>
+<div class="mt-6">
+<h2 class="text-xl font-bold text-pink-500 mb-4 flex items-center">
+<i aria-hidden="true" class="fas fa-magic mr-2"></i> AI Help
+                    </h2>
+<button class="w-full bg-gradient-to-r from-purple-400 to-pink-400 hover:from-purple-500 hover:to-pink-500 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center" id="ai-ideas-btn">
+<i aria-hidden="true" class="fas fa-lightbulb mr-2"></i> Get Ideas
+                    </button>
+</div>
 </div>
 </div>
 <!-- AI Ideas Modal -->
 <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden" id="ai-ideas-modal">
 <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
 <div class="flex justify-between items-center mb-4">
-<h3 class="text-xl font-bold text-pink-500">&nbsp;</h3>
+<h3 class="text-xl font-bold text-pink-500">Mariah Elizabeth Style Ideas</h3>
+<button class="text-gray-500 hover:text-gray-700 p-2" id="close-modal-btn">
+<i aria-hidden="true" class="fas fa-times"></i>
+</button>
 </div>
+<div class="mb-4" id="ai-ideas-content">
+<p class="text-gray-600 mb-4">Loading creative ideas...</p>
+<div class="flex justify-center">
+<div class="loading-spinner"></div>
+</div>
+</div>
+<button class="w-full bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded-lg mt-2 hidden" id="apply-idea-btn">
+                    Apply This Idea
+                </button>
 </div>
 </div>
 <!-- Text Input Modal -->
