@@ -289,33 +289,7 @@
 </div>
 </div>
 <div class="mt-6">
-<h2 class="text-xl font-bold text-pink-500 mb-4 flex items-center">
-<i aria-hidden="true" class="fas fa-magic mr-2"></i> AI Help
-                    </h2>
-<button class="w-full bg-gradient-to-r from-purple-400 to-pink-400 hover:from-purple-500 hover:to-pink-500 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center" id="ai-ideas-btn">
-<i aria-hidden="true" class="fas fa-lightbulb mr-2"></i> Get Ideas
-                    </button>
 </div>
-</div>
-</div>
-<!-- AI Ideas Modal -->
-<div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden" id="ai-ideas-modal">
-<div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
-<div class="flex justify-between items-center mb-4">
-<h3 class="text-xl font-bold text-pink-500">Mariah Elizabeth Style Ideas</h3>
-<button class="text-gray-500 hover:text-gray-700 p-2" id="close-modal-btn">
-<i aria-hidden="true" class="fas fa-times"></i>
-</button>
-</div>
-<div class="mb-4" id="ai-ideas-content">
-<p class="text-gray-600 mb-4">Loading creative ideas...</p>
-<div class="flex justify-center">
-<div class="loading-spinner"></div>
-</div>
-</div>
-<button class="w-full bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded-lg mt-2 hidden" id="apply-idea-btn">
-                    Apply This Idea
-                </button>
 </div>
 </div>
 <!-- Text Input Modal -->
@@ -812,115 +786,6 @@
                     currentTool = 'brush';
                 }
             });
-            
-            // AI Ideas
-            document.getElementById('ai-ideas-btn').addEventListener('click', function() {
-                document.getElementById('ai-ideas-modal').classList.remove('hidden');
-                document.getElementById('ai-ideas-content').innerHTML = `
-                    <p class="text-gray-600 mb-4">Loading creative ideas...</p>
-                    <div class="flex justify-center">
-                        <div class="loading-spinner"></div>
-                    </div>
-                `;
-                document.getElementById('apply-idea-btn').classList.add('hidden');
-                
-                // Call LLM for ideas
-                const systemPrompt = `
-                    You are an expert on Mariah Elizabeth's art style. Provide creative ideas for an art project in her style.
-                    Mariah Elizabeth is known for her colorful, whimsical designs, doodles, and transformations.
-                    Include specific suggestions for colors, patterns, and design elements that match her style.
-                    Format your response as a JSON object with these fields:
-                    1. title: A catchy title for the art idea
-                    2. description: A detailed description of the art concept (100-150 words)
-                    3. colors: An array of 4-6 specific hex color codes that match Mariah's style
-                    4. elements: An array of 3-5 specific design elements to include
-                    5. tips: 2-3 practical tips for creating this art
-                `;
-                
-                const userMessages = [
-                    {
-                        "role": "user",
-                        "content": "Give me a creative Mariah Elizabeth inspired art idea"
-                    }
-                ];
-                
-                const jsonFields = [
-                    { "title": "Title of the art idea" },
-                    { "description": "Detailed description of the concept" },
-                    { "colors": "Array of hex color codes" },
-                    { "elements": "Array of design elements" },
-                    { "tips": "Array of practical tips" }
-                ];
-                
-                try {
-                    window.call_llm(systemPrompt, userMessages, jsonFields)
-                        .then(response => {
-                            // Display the ideas
-                            const ideaHTML = `
-                                <h4 class="text-xl font-bold text-pink-500 mb-2">${response.title}</h4>
-                                <p class="text-gray-700 mb-4">${response.description}</p>
-                                
-                                <h5 class="font-bold text-gray-700 mb-2">Colors to Use:</h5>
-                                <div class="flex flex-wrap gap-2 mb-4">
-                                    ${response.colors.map(color => `
-                                        <div class="w-8 h-8 rounded-full" style="background-color: ${color};" title="${color}"></div>
-                                    `).join('')}
-                                </div>
-                                
-                                <h5 class="font-bold text-gray-700 mb-2">Design Elements:</h5>
-                                <ul class="list-disc list-inside mb-4">
-                                    ${response.elements.map(element => `<li class="text-gray-700">${element}</li>`).join('')}
-                                </ul>
-                                
-                                <h5 class="font-bold text-gray-700 mb-2">Tips:</h5>
-                                <ul class="list-disc list-inside">
-                                    ${response.tips.map(tip => `<li class="text-gray-700">${tip}</li>`).join('')}
-                                </ul>
-                            `;
-                            
-                            document.getElementById('ai-ideas-content').innerHTML = ideaHTML;
-                            document.getElementById('apply-idea-btn').classList.remove('hidden');
-                            
-                            // Store the colors for easy application
-                            document.getElementById('apply-idea-btn').dataset.colors = JSON.stringify(response.colors);
-                        })
-                        .catch(error => {
-                            document.getElementById('ai-ideas-content').innerHTML = `
-                                <p class="text-red-500">Sorry, there was an error generating ideas. Please try again.</p>
-                            `;
-                        });
-                } catch (error) {
-                    document.getElementById('ai-ideas-content').innerHTML = `
-                        <p class="text-red-500">Sorry, there was an error generating ideas. Please try again.</p>
-                    `;
-                }
-            });
-            
-            // Apply AI idea
-            document.getElementById('apply-idea-btn').addEventListener('click', function() {
-                const colors = JSON.parse(this.dataset.colors || '[]');
-                
-                // Add colors to the palette
-                if (colors.length > 0) {
-                    const colorSwatches = document.querySelectorAll('.color-swatch');
-                    for (let i = 0; i < Math.min(colors.length, colorSwatches.length); i++) {
-                        colorSwatches[i].style.backgroundColor = colors[i];
-                        colorSwatches[i].dataset.color = colors[i];
-                    }
-                    
-                    // Set current color to first suggested color
-                    currentColor = colors[0];
-                    document.getElementById('custom-color').value = currentColor;
-                }
-                
-                document.getElementById('ai-ideas-modal').classList.add('hidden');
-            });
-            
-            // Close AI ideas modal
-            document.getElementById('close-modal-btn').addEventListener('click', function() {
-                document.getElementById('ai-ideas-modal').classList.add('hidden');
-            });
-            
             // Event listeners for mouse
             canvas.addEventListener('mousedown', function(e) {
                 e.preventDefault();
