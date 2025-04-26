@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Mariah Elizabeth Inspired Art Creator</title>
+<meta content="Mariah Elizabeth Art Creator" property="og:title"/>
+<meta content="Create colorful, whimsical art inspired by Mariah Elizabeth's style" property="og:description"/>
+<meta content="assets/img_1200x630_bd085ae3.png" property="og:image"/>
+<meta content="website" property="og:type"/>
+<link href="assets/img_32x32_4789083b.png" rel="icon"/>
+<script src="assets/script_968c7d5e.js"></script>
+<link href="assets/style_f6f84b2a.css" rel="stylesheet"/>
+<script src="assets/script_ce0d4775.js"></script>
+<!-- Font Awesome -->
+<link href="assets/style_15fed980.css" rel="stylesheet"/>
+<script crossorigin="" src="assets/script_04c46215.js"></script>
+<style>
+        @font-face {
+            font-family: 'Font Awesome 6 Free';
+            font-path: '/chat/webfonts/fa-regular-400';
+            src: url('/chat/webfonts/fa-regular-400.woff2') format('woff2'),
+                url('/chat/webfonts/fa-regular-400.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'Font Awesome 6 Free';
+            font-path: '/chat/webfonts/fa-solid-900';
+            src: url('/chat/webfonts/fa-solid-900.woff2') format('woff2'),
+                url('/chat/webfonts/fa-solid-900.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'Font Awesome 6 Brands';
+            font-path: '/chat/webfonts/fa-brands-400';
+            src: url('/chat/webfonts/fa-brands-400.woff2') format('woff2'),
+                url('/chat/webfonts/fa-brands-400.ttf') format('truetype');
+        }
+        
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            overflow-x: hidden;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+            touch-action: manipulation;
+        }
+        
+        .canvas-container {
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            touch-action: none;
+        }
+        
+        #drawing-canvas {
+            cursor: crosshair;
+            background-color: white;
+            touch-action: none;
+        }
+        
+        .color-swatch {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .tool-btn {
+            transition: all 0.2s;
+            min-height: 44px; /* Minimum touch target size for iOS */
+        }
+        
+        .tool-btn.active {
+            background-color: #fde68a;
+            box-shadow: 0 0 0 2px #f59e0b;
+        }
+        
+        .sticker {
+            width: 60px;
+            height: 60px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            min-height: 44px; /* Minimum touch target size for iOS */
+        }
+        
+        .pattern-btn {
+            width: 50px;
+            height: 50px;
+            background-size: cover;
+            cursor: pointer;
+            transition: transform 0.2s;
+            min-height: 44px; /* Minimum touch target size for iOS */
+        }
+        
+        #loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+        
+        .loading-spinner {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #ff6b6b;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* iOS specific fixes */
+        button, a, input, select {
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        input[type="range"] {
+            -webkit-appearance: none;
+            margin: 10px 0;
+            width: 100%;
+            background: transparent;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 24px;
+            width: 24px;
+            border-radius: 50%;
+            background: #ff6b6b;
+            cursor: pointer;
+            margin-top: -8px;
+        }
+        
+        input[type="range"]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 8px;
+            cursor: pointer;
+            background: #f3f3f3;
+            border-radius: 4px;
+        }
+    </style>
+<script>
+            window.load_data_from_csv = (filename) => {
+                // Implementation needed when code is downloaded
+            };
+
+            window.save_data_to_csv = (filename, data) => {
+                // Implementation needed when code is downloaded
+            };
+
+            window.call_llm = (system_prompt, user_messages, json_fields) => {
+                // Implementation needed when code is downloaded
+            };
+        </script></head>
+<body class="bg-pink-50">
+<!-- Loading Overlay -->
+<div id="loading-overlay">
+<div class="loading-spinner mb-4"></div>
+<p class="text-xl font-bold text-pink-500">Loading Mariah Elizabeth Art Creator...</p>
+<p class="text-gray-600 mt-2">Get ready to create something awesome!</p>
+</div>
+<!-- Header -->
+<header class="bg-gradient-to-r from-pink-400 via-purple-400 to-blue-400 text-white py-4 shadow-md">
+<div class="container mx-auto px-4 flex justify-between items-center">
+<div class="flex items-center">
+<i aria-hidden="true" class="fas fa-paint-brush text-2xl mr-2"></i>
+<h1 class="text-2xl md:text-3xl font-bold">Mariah Elizabeth Art Creator</h1>
+</div>
+<div>
+<button class="bg-white text-pink-500 hover:bg-pink-100 px-4 py-2 rounded-full font-bold flex items-center" id="save-btn">
+<i aria-hidden="true" class="fas fa-save mr-2"></i> Save
+                </button>
+</div>
+</div>
+</header>
+<main class="container mx-auto px-4 py-6">
+<div class="flex flex-col lg:flex-row gap-6">
+<!-- Left Sidebar - Tools -->
+<div class="lg:w-1/5 bg-white p-4 rounded-lg shadow-md">
+<h2 class="text-xl font-bold text-pink-500 mb-4 flex items-center">
+<i aria-hidden="true" class="fas fa-tools mr-2"></i> Tools
+                </h2>
+<div class="grid grid-cols-3 gap-2 mb-6">
+<button class="tool-btn active p-2 rounded-lg bg-gray-100 flex flex-col items-center justify-center" data-tool="brush">
+<i aria-hidden="true" class="fas fa-paint-brush text-lg"></i>
+<span class="text-xs mt-1">Brush</span>
+</button>
+<button class="tool-btn p-2 rounded-lg bg-gray-100 flex flex-col items-center justify-center" data-tool="marker">
+<i aria-hidden="true" class="fas fa-marker text-lg"></i>
+<span class="text-xs mt-1">Marker</span>
+</button>
+<button class="tool-btn p-2 rounded-lg bg-gray-100 flex flex-col items-center justify-center" data-tool="eraser">
+<i aria-hidden="true" class="fas fa-eraser text-lg"></i>
+<span class="text-xs mt-1">Eraser</span>
+</button>
+<button class="tool-btn p-2 rounded-lg bg-gray-100 flex flex-col items-center justify-center" data-tool="fill">
+<i aria-hidden="true" class="fas fa-fill-drip text-lg"></i>
+<span class="text-xs mt-1">Fill</span>
+</button>
+<button class="tool-btn p-2 rounded-lg bg-gray-100 flex flex-col items-center justify-center" data-tool="text">
+<i aria-hidden="true" class="fas fa-font text-lg"></i>
+<span class="text-xs mt-1">Text</span>
+</button>
+<button class="tool-btn p-2 rounded-lg bg-gray-100 flex flex-col items-center justify-center" data-tool="sticker">
+<i aria-hidden="true" class="fas fa-sticky-note text-lg"></i>
+<span class="text-xs mt-1">Sticker</span>
+</button>
+</div>
+<div class="mb-6">
+<h3 class="text-lg font-semibold text-gray-700 mb-2">Brush Size</h3>
+<input class="w-full" id="brush-size" max="50" min="1" type="range" value="5"/>
+<div class="flex justify-between text-xs text-gray-500">
+<span>Small</span>
+<span>Large</span>
+</div>
+</div>
+<div>
+<h3 class="text-lg font-semibold text-gray-700 mb-2">Actions</h3>
+<div class="grid grid-cols-2 gap-2">
+<button class="bg-red-100 hover:bg-red-200 text-red-700 p-2 rounded-lg flex items-center justify-center" id="clear-btn">
+<i aria-hidden="true" class="fas fa-trash-alt mr-1"></i> Clear
+                        </button>
+<button class="bg-blue-100 hover:bg-blue-200 text-blue-700 p-2 rounded-lg flex items-center justify-center" id="undo-btn">
+<i aria-hidden="true" class="fas fa-undo mr-1"></i> Undo
+                        </button>
+</div>
+</div>
+</div>
+<!-- Center - Canvas -->
+<div class="lg:w-3/5">
+<div class="canvas-container rounded-lg overflow-hidden">
+<canvas class="w-full border border-gray-300 rounded-lg" id="drawing-canvas"></canvas>
+</div>
+<div class="mt-4 bg-white p-4 rounded-lg shadow-md">
+<h3 class="text-lg font-semibold text-gray-700 mb-2">Mariah Elizabeth Color Palette</h3>
+<div class="flex flex-wrap gap-2">
+<div class="color-swatch" data-color="#FF6B6B" style="background-color: #FF6B6B;"></div>
+<div class="color-swatch" data-color="#FFD93D" style="background-color: #FFD93D;"></div>
+<div class="color-swatch" data-color="#6BCB77" style="background-color: #6BCB77;"></div>
+<div class="color-swatch" data-color="#4D96FF" style="background-color: #4D96FF;"></div>
+<div class="color-swatch" data-color="#9D65C9" style="background-color: #9D65C9;"></div>
+<div class="color-swatch" data-color="#FF9A8B" style="background-color: #FF9A8B;"></div>
+<div class="color-swatch" data-color="#F2D7EE" style="background-color: #F2D7EE;"></div>
+<div class="color-swatch" data-color="#BFFFF0" style="background-color: #BFFFF0;"></div>
+<div class="color-swatch" data-color="#000000" style="background-color: #000000;"></div>
+<div class="color-swatch" data-color="#FFFFFF" style="background-color: #FFFFFF; border: 1px solid #ddd;"></div>
+<input class="w-8 h-8 cursor-pointer" id="custom-color" type="color" value="#FF6B6B"/>
+</div>
+</div>
+</div>
+<!-- Right Sidebar - Stickers & Patterns -->
+<div class="lg:w-1/5 bg-white p-4 rounded-lg shadow-md">
+<div class="mb-6">
+<h2 class="text-xl font-bold text-pink-500 mb-4 flex items-center">
+<i aria-hidden="true" class="fas fa-star mr-2"></i> Stickers
+                    </h2>
+<div class="grid grid-cols-2 gap-2">
+<img alt="Smiley sticker" class="sticker rounded-lg border border-gray-200" data-index="0" src="assets/sprite_64x64_c7925219.png"/>
+<img alt="Heart sticker" class="sticker rounded-lg border border-gray-200" data-index="1" src="assets/sprite_64x64_6dfc8b8d.png"/>
+<img alt="Star sticker" class="sticker rounded-lg border border-gray-200" data-index="2" src="assets/sprite_64x64_20122a17.png"/>
+<img alt="Cloud sticker" class="sticker rounded-lg border border-gray-200" data-index="3" src="assets/sprite_64x64_75f49633.png"/>
+<img alt="Rainbow sticker" class="sticker rounded-lg border border-gray-200" data-index="4" src="assets/sprite_64x64_1a194555.png"/>
+<img alt="Flower sticker" class="sticker rounded-lg border border-gray-200" data-index="5" src="assets/sprite_64x64_fdb189bb.png"/>
+</div>
+</div>
+<div>
+<h2 class="text-xl font-bold text-pink-500 mb-4 flex items-center">
+<i aria-hidden="true" class="fas fa-shapes mr-2"></i> Patterns
+                    </h2>
+<div class="grid grid-cols-2 gap-2">
+<div class="pattern-btn rounded-lg border border-gray-200" data-index="0" style="background-image: url('https://cdn.simulationtheory.ai/gasset/?asset=img&amp;prompt=polka dot pattern&amp;w=100&amp;h=100&amp;transparent=true&amp;style=pixel_art')"></div>
+<div class="pattern-btn rounded-lg border border-gray-200" data-index="1" style="background-image: url('https://cdn.simulationtheory.ai/gasset/?asset=img&amp;prompt=zigzag pattern&amp;w=100&amp;h=100&amp;transparent=true&amp;style=pixel_art')"></div>
+<div class="pattern-btn rounded-lg border border-gray-200" data-index="2" style="background-image: url('https://cdn.simulationtheory.ai/gasset/?asset=img&amp;prompt=rainbow stripes pattern&amp;w=100&amp;h=100&amp;transparent=true&amp;style=pixel_art')"></div>
+<div class="pattern-btn rounded-lg border border-gray-200" data-index="3" style="background-image: url('https://cdn.simulationtheory.ai/gasset/?asset=img&amp;prompt=stars pattern&amp;w=100&amp;h=100&amp;transparent=true&amp;style=pixel_art')"></div>
+</div>
+</div>
+<div class="mt-6">
+<h2 class="text-xl font-bold text-pink-500 mb-4 flex items-center">
+<i aria-hidden="true" class="fas fa-magic mr-2"></i> AI Help
+                    </h2>
+<button class="w-full bg-gradient-to-r from-purple-400 to-pink-400 hover:from-purple-500 hover:to-pink-500 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center" id="ai-ideas-btn">
+<i aria-hidden="true" class="fas fa-lightbulb mr-2"></i> Get Ideas
+                    </button>
+</div>
+</div>
+</div>
+<!-- AI Ideas Modal -->
+<div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden" id="ai-ideas-modal">
+<div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+<div class="flex justify-between items-center mb-4">
+<h3 class="text-xl font-bold text-pink-500">Mariah Elizabeth Style Ideas</h3>
+<button class="text-gray-500 hover:text-gray-700 p-2" id="close-modal-btn">
+<i aria-hidden="true" class="fas fa-times"></i>
+</button>
+</div>
+<div class="mb-4" id="ai-ideas-content">
+<p class="text-gray-600 mb-4">Loading creative ideas...</p>
+<div class="flex justify-center">
+<div class="loading-spinner"></div>
+</div>
+</div>
+<button class="w-full bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded-lg mt-2 hidden" id="apply-idea-btn">
+                    Apply This Idea
+                </button>
+</div>
+</div>
+<!-- Text Input Modal -->
+<div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden" id="text-input-modal">
+<div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+<div class="flex justify-between items-center mb-4">
+<h3 class="text-xl font-bold text-pink-500">Add Text</h3>
+<button class="text-gray-500 hover:text-gray-700 p-2" id="close-text-modal-btn">
+<i aria-hidden="true" class="fas fa-times"></i>
+</button>
+</div>
+<div class="mb-4">
+<input class="w-full border border-gray-300 rounded-lg p-2" id="text-input" placeholder="Enter your text" type="text"/>
+</div>
+<div class="mb-4">
+<label class="block text-gray-700 mb-2">Font Size</label>
+<input class="w-full" id="font-size" max="72" min="12" type="range" value="24"/>
+<div class="flex justify-between text-xs text-gray-500">
+<span>Small</span>
+<span>Large</span>
+</div>
+</div>
+<div class="mb-4">
+<label class="block text-gray-700 mb-2">Font Style</label>
+<select class="w-full border border-gray-300 rounded-lg p-2" id="font-style">
+<option value="Comic Sans MS, cursive">Comic Sans (Mariah's Style)</option>
+<option value="Arial, sans-serif">Arial</option>
+<option value="Georgia, serif">Georgia</option>
+<option value="Impact, fantasy">Impact</option>
+</select>
+</div>
+<button class="w-full bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded-lg" id="add-text-btn">
+                    Add Text
+                </button>
+</div>
+</div>
+</main>
+<footer class="bg-gray-800 text-white py-4 mt-8">
+<div class="container mx-auto px-4 text-center">
+<p>Created with <i aria-hidden="true" class="fas fa-heart text-pink-500"></i> for Mariah Elizabeth fans</p>
+<p class="text-sm text-gray-400 mt-2">This app is inspired by Mariah Elizabeth's art style but is not affiliated with her.</p>
+</div>
+</footer>
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Canvas setup
+            const canvas = document.getElementById('drawing-canvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Drawing state
+            let isDrawing = false;
+            let lastX = 0;
+            let lastY = 0;
+            let currentTool = 'brush';
+            let currentColor = '#FF6B6B';
+            let brushSize = 5;
+            let canvasHistory = [];
+            let currentHistoryIndex = -1;
+            let stickerImages = [];
+            let patternImages = [];
+            
+            // Hide loading overlay after everything is loaded
+            setTimeout(() => {
+                document.getElementById('loading-overlay').style.display = 'none';
+            }, 1500);
+            
+            // Set canvas size to match container
+            function resizeCanvas() {
+                const container = canvas.parentElement;
+                canvas.width = container.clientWidth;
+                canvas.height = window.innerHeight * 0.6;
+                
+                // Fill canvas with white background
+                ctx.fillStyle = '#FFFFFF';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                // Redraw canvas content if needed
+                if (canvasHistory.length > 0 && currentHistoryIndex >= 0) {
+                    const lastState = canvasHistory[currentHistoryIndex];
+                    if (lastState) {
+                        const img = new Image();
+                        img.onload = function() {
+                            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                        };
+                        img.src = lastState;
+                    }
+                }
+            }
+            
+            // Initialize canvas
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+            
+            // Preload sticker images
+            const stickerElements = document.querySelectorAll('.sticker');
+            stickerElements.forEach(sticker => {
+                const img = new Image();
+                img.crossOrigin = "Anonymous";
+                img.src = sticker.src;
+                img.onload = () => {
+                    stickerImages[parseInt(sticker.dataset.index)] = img;
+                };
+                img.onerror = () => {
+                    console.error("Failed to load sticker image:", sticker.src);
+                };
+            });
+            
+            // Preload pattern images
+            const patternElements = document.querySelectorAll('.pattern-btn');
+            patternElements.forEach(pattern => {
+                const img = new Image();
+                img.crossOrigin = "Anonymous";
+                const bgImage = pattern.style.backgroundImage;
+                const url = bgImage.substring(bgImage.indexOf('(') + 1, bgImage.lastIndexOf(')'));
+                img.src = url.replace(/['"]/g, '');
+                img.onload = () => {
+                    patternImages[parseInt(pattern.dataset.index)] = img;
+                };
+                img.onerror = () => {
+                    console.error("Failed to load pattern image:", img.src);
+                };
+            });
+            
+            // Save initial canvas state
+            saveCanvasState();
+            
+            // Tool selection
+            const toolButtons = document.querySelectorAll('.tool-btn');
+            toolButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    toolButtons.forEach(btn => btn.classList.remove('active'));
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    // Set current tool
+                    currentTool = this.dataset.tool;
+                    
+                    // Show text input modal if text tool is selected
+                    if (currentTool === 'text') {
+                        document.getElementById('text-input-modal').classList.remove('hidden');
+                    }
+                });
+            });
+            
+            // Brush size
+            const brushSizeInput = document.getElementById('brush-size');
+            brushSizeInput.addEventListener('input', function() {
+                brushSize = parseInt(this.value);
+            });
+            
+            // Color selection
+            const colorSwatches = document.querySelectorAll('.color-swatch');
+            colorSwatches.forEach(swatch => {
+                swatch.addEventListener('click', function() {
+                    currentColor = this.dataset.color;
+                    document.getElementById('custom-color').value = currentColor;
+                });
+            });
+            
+            // Custom color picker
+            const customColorPicker = document.getElementById('custom-color');
+            customColorPicker.addEventListener('input', function() {
+                currentColor = this.value;
+            });
+            
+            // Drawing functions
+            function startDrawing(e) {
+                isDrawing = true;
+                const pos = getMousePos(canvas, e);
+                lastX = pos[0];
+                lastY = pos[1];
+                
+                // If fill tool is selected, fill area
+                if (currentTool === 'fill') {
+                    floodFill(Math.floor(lastX), Math.floor(lastY), currentColor);
+                    saveCanvasState();
+                    isDrawing = false;
+                }
+            }
+            
+            function draw(e) {
+                if (!isDrawing) return;
+                
+                const pos = getMousePos(canvas, e);
+                const x = pos[0];
+                const y = pos[1];
+                
+                ctx.lineJoin = 'round';
+                ctx.lineCap = 'round';
+                
+                if (currentTool === 'eraser') {
+                    ctx.globalCompositeOperation = 'destination-out';
+                    ctx.lineWidth = brushSize * 2;
+                } else {
+                    ctx.globalCompositeOperation = 'source-over';
+                    ctx.lineWidth = brushSize;
+                }
+                
+                if (currentTool === 'marker') {
+                    ctx.globalAlpha = 0.5;
+                } else {
+                    ctx.globalAlpha = 1.0;
+                }
+                
+                ctx.strokeStyle = currentColor;
+                
+                ctx.beginPath();
+                ctx.moveTo(lastX, lastY);
+                ctx.lineTo(x, y);
+                ctx.stroke();
+                
+                lastX = x;
+                lastY = y;
+            }
+            
+            function stopDrawing() {
+                if (isDrawing) {
+                    isDrawing = false;
+                    saveCanvasState();
+                }
+            }
+            
+            // Helper function to get mouse position
+            function getMousePos(canvas, evt) {
+                const rect = canvas.getBoundingClientRect();
+                const scaleX = canvas.width / rect.width;
+                const scaleY = canvas.height / rect.height;
+                
+                let clientX, clientY;
+                
+                if (evt.type.startsWith('touch')) {
+                    if (evt.touches && evt.touches.length > 0) {
+                        clientX = evt.touches[0].clientX;
+                        clientY = evt.touches[0].clientY;
+                    } else {
+                        return [lastX, lastY]; // Return last position if no touches
+                    }
+                } else {
+                    clientX = evt.clientX;
+                    clientY = evt.clientY;
+                }
+                
+                return [
+                    (clientX - rect.left) * scaleX,
+                    (clientY - rect.top) * scaleY
+                ];
+            }
+            
+            // Flood fill algorithm
+            function floodFill(startX, startY, fillColor) {
+                try {
+                    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                    const data = imageData.data;
+                    
+                    // Get the color at the start position
+                    const startPos = (startY * canvas.width + startX) * 4;
+                    const startR = data[startPos];
+                    const startG = data[startPos + 1];
+                    const startB = data[startPos + 2];
+                    const startA = data[startPos + 3];
+                    
+                    // Convert fill color from hex to RGBA
+                    const fillColorRgb = hexToRgb(fillColor);
+                    const fillR = fillColorRgb.r;
+                    const fillG = fillColorRgb.g;
+                    const fillB = fillColorRgb.b;
+                    const fillA = 255;
+                    
+                    // Don't fill if the color is the same
+                    if (startR === fillR && startG === fillG && startB === fillB && startA === fillA) {
+                        return;
+                    }
+                    
+                    // Queue for flood fill
+                    const queue = [];
+                    queue.push([startX, startY]);
+                    
+                    // Limit the number of iterations to prevent browser hanging
+                    let iterations = 0;
+                    const maxIterations = canvas.width * canvas.height / 10; // Reduced for performance
+                    
+                    while (queue.length > 0 && iterations < maxIterations) {
+                        iterations++;
+                        const [x, y] = queue.shift();
+                        const pos = (y * canvas.width + x) * 4;
+                        
+                        // Check if this pixel has the start color
+                        if (
+                            x >= 0 && x < canvas.width &&
+                            y >= 0 && y < canvas.height &&
+                            data[pos] === startR &&
+                            data[pos + 1] === startG &&
+                            data[pos + 2] === startB &&
+                            data[pos + 3] === startA
+                        ) {
+                            // Fill this pixel
+                            data[pos] = fillR;
+                            data[pos + 1] = fillG;
+                            data[pos + 2] = fillB;
+                            data[pos + 3] = fillA;
+                            
+                            // Add neighboring pixels to queue
+                            queue.push([x + 1, y]);
+                            queue.push([x - 1, y]);
+                            queue.push([x, y + 1]);
+                            queue.push([x, y - 1]);
+                        }
+                    }
+                    
+                    ctx.putImageData(imageData, 0, 0);
+                } catch (error) {
+                    console.error("Error in flood fill:", error);
+                    // Simple fallback - just fill the entire canvas
+                    ctx.fillStyle = fillColor;
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                }
+            }
+            
+            // Helper function to convert hex to RGB
+            function hexToRgb(hex) {
+                const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+                return result ? {
+                    r: parseInt(result[1], 16),
+                    g: parseInt(result[2], 16),
+                    b: parseInt(result[3], 16)
+                } : { r: 0, g: 0, b: 0 };
+            }
+            
+            // Save canvas state for undo
+            function saveCanvasState() {
+                try {
+                    // If we're not at the end of the history, remove everything after current index
+                    if (currentHistoryIndex < canvasHistory.length - 1) {
+                        canvasHistory = canvasHistory.slice(0, currentHistoryIndex + 1);
+                    }
+                    
+                    // Save current state
+                    canvasHistory.push(canvas.toDataURL('image/png', 0.5)); // Lower quality for better performance
+                    currentHistoryIndex = canvasHistory.length - 1;
+                    
+                    // Limit history size
+                    if (canvasHistory.length > 10) { // Reduced for performance
+                        canvasHistory.shift();
+                        currentHistoryIndex--;
+                    }
+                } catch (error) {
+                    console.error("Error saving canvas state:", error);
+                }
+            }
+            
+            // Undo function
+            function undo() {
+                if (currentHistoryIndex > 0) {
+                    currentHistoryIndex--;
+                    const img = new Image();
+                    img.onload = function() {
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+                        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    };
+                    img.src = canvasHistory[currentHistoryIndex];
+                }
+            }
+            
+            // Clear canvas
+            function clearCanvas() {
+                ctx.fillStyle = '#FFFFFF';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                saveCanvasState();
+            }
+            
+            // Save artwork
+            function saveArtwork() {
+                try {
+                    const link = document.createElement('a');
+                    link.download = 'mariah-elizabeth-style-artwork.png';
+                    link.href = canvas.toDataURL('image/png');
+                    link.click();
+                    
+                    // Save data for analytics
+                    const artworkData = {
+                        timestamp: new Date().toISOString(),
+                        canvasWidth: canvas.width,
+                        canvasHeight: canvas.height,
+                        toolsUsed: 'Drawing App'
+                    };
+                    
+                    window.save_data_to_csv('mariah_elizabeth_art_creations.csv', [artworkData]);
+                } catch (error) {
+                    console.error("Error saving artwork:", error);
+                    alert("There was an error saving your artwork. Please try again.");
+                }
+            }
+            
+            // Add stickers
+            const stickers = document.querySelectorAll('.sticker');
+            stickers.forEach(sticker => {
+                sticker.addEventListener('click', function() {
+                    if (currentTool === 'sticker') {
+                        const index = parseInt(this.dataset.index);
+                        const img = stickerImages[index];
+                        if (img) {
+                            // Calculate position to center the sticker at cursor
+                            const x = lastX - img.width / 2;
+                            const y = lastY - img.height / 2;
+                            ctx.drawImage(img, x, y);
+                            saveCanvasState();
+                        }
+                    } else {
+                        // Change to sticker tool and highlight it
+                        toolButtons.forEach(btn => btn.classList.remove('active'));
+                        document.querySelector('[data-tool="sticker"]').classList.add('active');
+                        currentTool = 'sticker';
+                        
+                        // Then add the sticker
+                        const index = parseInt(this.dataset.index);
+                        const img = stickerImages[index];
+                        if (img) {
+                            // Calculate position to center the sticker
+                            const x = canvas.width / 2 - img.width / 2;
+                            const y = canvas.height / 2 - img.height / 2;
+                            ctx.drawImage(img, x, y);
+                            saveCanvasState();
+                        }
+                    }
+                });
+            });
+            
+            // Add patterns
+            const patterns = document.querySelectorAll('.pattern-btn');
+            patterns.forEach(pattern => {
+                pattern.addEventListener('click', function() {
+                    const index = parseInt(this.dataset.index);
+                    const img = patternImages[index];
+                    if (img) {
+                        try {
+                            const pattern = ctx.createPattern(img, 'repeat');
+                            
+                            // Store current settings
+                            const currentGlobalAlpha = ctx.globalAlpha;
+                            
+                            // Set pattern as fill style
+                            ctx.globalAlpha = 0.7;
+                            ctx.fillStyle = pattern;
+                            
+                            // Draw a rectangle with the pattern
+                            ctx.fillRect(0, 0, canvas.width, canvas.height);
+                            
+                            // Restore settings
+                            ctx.globalAlpha = currentGlobalAlpha;
+                            
+                            saveCanvasState();
+                        } catch (error) {
+                            console.error("Error applying pattern:", error);
+                        }
+                    }
+                });
+            });
+            
+            // Add text
+            document.getElementById('add-text-btn').addEventListener('click', function() {
+                const textInput = document.getElementById('text-input').value;
+                if (!textInput) return;
+                
+                const fontSize = document.getElementById('font-size').value;
+                const fontStyle = document.getElementById('font-style').value;
+                
+                ctx.font = `${fontSize}px ${fontStyle}`;
+                ctx.fillStyle = currentColor;
+                ctx.textAlign = 'center';
+                
+                // Draw text at last mouse position or center if not set
+                const textX = lastX || canvas.width / 2;
+                const textY = lastY || canvas.height / 2;
+                
+                ctx.fillText(textInput, textX, textY);
+                
+                saveCanvasState();
+                document.getElementById('text-input-modal').classList.add('hidden');
+                
+                // Reset tool to brush after adding text
+                toolButtons.forEach(btn => btn.classList.remove('active'));
+                document.querySelector('[data-tool="brush"]').classList.add('active');
+                currentTool = 'brush';
+            });
+            
+            // Close text modal
+            document.getElementById('close-text-modal-btn').addEventListener('click', function() {
+                document.getElementById('text-input-modal').classList.add('hidden');
+                
+                // Reset tool to brush if closing without adding text
+                if (currentTool === 'text') {
+                    toolButtons.forEach(btn => btn.classList.remove('active'));
+                    document.querySelector('[data-tool="brush"]').classList.add('active');
+                    currentTool = 'brush';
+                }
+            });
+            
+            // AI Ideas
+            document.getElementById('ai-ideas-btn').addEventListener('click', function() {
+                document.getElementById('ai-ideas-modal').classList.remove('hidden');
+                document.getElementById('ai-ideas-content').innerHTML = `
+                    <p class="text-gray-600 mb-4">Loading creative ideas...</p>
+                    <div class="flex justify-center">
+                        <div class="loading-spinner"></div>
+                    </div>
+                `;
+                document.getElementById('apply-idea-btn').classList.add('hidden');
+                
+                // Call LLM for ideas
+                const systemPrompt = `
+                    You are an expert on Mariah Elizabeth's art style. Provide creative ideas for an art project in her style.
+                    Mariah Elizabeth is known for her colorful, whimsical designs, doodles, and transformations.
+                    Include specific suggestions for colors, patterns, and design elements that match her style.
+                    Format your response as a JSON object with these fields:
+                    1. title: A catchy title for the art idea
+                    2. description: A detailed description of the art concept (100-150 words)
+                    3. colors: An array of 4-6 specific hex color codes that match Mariah's style
+                    4. elements: An array of 3-5 specific design elements to include
+                    5. tips: 2-3 practical tips for creating this art
+                `;
+                
+                const userMessages = [
+                    {
+                        "role": "user",
+                        "content": "Give me a creative Mariah Elizabeth inspired art idea"
+                    }
+                ];
+                
+                const jsonFields = [
+                    { "title": "Title of the art idea" },
+                    { "description": "Detailed description of the concept" },
+                    { "colors": "Array of hex color codes" },
+                    { "elements": "Array of design elements" },
+                    { "tips": "Array of practical tips" }
+                ];
+                
+                try {
+                    window.call_llm(systemPrompt, userMessages, jsonFields)
+                        .then(response => {
+                            // Display the ideas
+                            const ideaHTML = `
+                                <h4 class="text-xl font-bold text-pink-500 mb-2">${response.title}</h4>
+                                <p class="text-gray-700 mb-4">${response.description}</p>
+                                
+                                <h5 class="font-bold text-gray-700 mb-2">Colors to Use:</h5>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    ${response.colors.map(color => `
+                                        <div class="w-8 h-8 rounded-full" style="background-color: ${color};" title="${color}"></div>
+                                    `).join('')}
+                                </div>
+                                
+                                <h5 class="font-bold text-gray-700 mb-2">Design Elements:</h5>
+                                <ul class="list-disc list-inside mb-4">
+                                    ${response.elements.map(element => `<li class="text-gray-700">${element}</li>`).join('')}
+                                </ul>
+                                
+                                <h5 class="font-bold text-gray-700 mb-2">Tips:</h5>
+                                <ul class="list-disc list-inside">
+                                    ${response.tips.map(tip => `<li class="text-gray-700">${tip}</li>`).join('')}
+                                </ul>
+                            `;
+                            
+                            document.getElementById('ai-ideas-content').innerHTML = ideaHTML;
+                            document.getElementById('apply-idea-btn').classList.remove('hidden');
+                            
+                            // Store the colors for easy application
+                            document.getElementById('apply-idea-btn').dataset.colors = JSON.stringify(response.colors);
+                        })
+                        .catch(error => {
+                            document.getElementById('ai-ideas-content').innerHTML = `
+                                <p class="text-red-500">Sorry, there was an error generating ideas. Please try again.</p>
+                            `;
+                        });
+                } catch (error) {
+                    document.getElementById('ai-ideas-content').innerHTML = `
+                        <p class="text-red-500">Sorry, there was an error generating ideas. Please try again.</p>
+                    `;
+                }
+            });
+            
+            // Apply AI idea
+            document.getElementById('apply-idea-btn').addEventListener('click', function() {
+                const colors = JSON.parse(this.dataset.colors || '[]');
+                
+                // Add colors to the palette
+                if (colors.length > 0) {
+                    const colorSwatches = document.querySelectorAll('.color-swatch');
+                    for (let i = 0; i < Math.min(colors.length, colorSwatches.length); i++) {
+                        colorSwatches[i].style.backgroundColor = colors[i];
+                        colorSwatches[i].dataset.color = colors[i];
+                    }
+                    
+                    // Set current color to first suggested color
+                    currentColor = colors[0];
+                    document.getElementById('custom-color').value = currentColor;
+                }
+                
+                document.getElementById('ai-ideas-modal').classList.add('hidden');
+            });
+            
+            // Close AI ideas modal
+            document.getElementById('close-modal-btn').addEventListener('click', function() {
+                document.getElementById('ai-ideas-modal').classList.add('hidden');
+            });
+            
+            // Event listeners for mouse
+            canvas.addEventListener('mousedown', function(e) {
+                e.preventDefault();
+                startDrawing(e);
+            });
+            
+            canvas.addEventListener('mousemove', function(e) {
+                e.preventDefault();
+                draw(e);
+            });
+            
+            canvas.addEventListener('mouseup', function(e) {
+                e.preventDefault();
+                stopDrawing();
+            });
+            
+            canvas.addEventListener('mouseout', function(e) {
+                e.preventDefault();
+                stopDrawing();
+            });
+            
+            // Touch support for iOS
+            canvas.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                startDrawing(e);
+            }, { passive: false });
+            
+            canvas.addEventListener('touchmove', function(e) {
+                e.preventDefault();
+                draw(e);
+            }, { passive: false });
+            
+            canvas.addEventListener('touchend', function(e) {
+                e.preventDefault();
+                stopDrawing();
+            }, { passive: false });
+            
+            // Button event listeners
+            document.getElementById('clear-btn').addEventListener('click', clearCanvas);
+            document.getElementById('undo-btn').addEventListener('click', undo);
+            document.getElementById('save-btn').addEventListener('click', saveArtwork);
+            
+            // Set initial position for canvas when clicked
+            canvas.addEventListener('click', function(e) {
+                const pos = getMousePos(canvas, e);
+                lastX = pos[0];
+                lastY = pos[1];
+            });
+            
+            // Prevent scrolling when interacting with the canvas
+            document.body.addEventListener('touchmove', function(e) {
+                if (e.target === canvas) {
+                    e.preventDefault();
+                }
+            }, { passive: false });
+        });
+    </script>
+</body>
+</html>
