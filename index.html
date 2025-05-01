@@ -4,9 +4,9 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
-<title>Mariah Elizabeth Inspired Art Creator</title>
-<meta content="Mariah Elizabeth Art Creator" property="og:title"/>
-<meta content="Create colorful, whimsical art inspired by Mariah Elizabeth's style" property="og:description"/>
+<title>Moriah Elizabeth Inspired Art Creator</title>
+<meta content="Moriah Elizabeth Art Creator" property="og:title"/>
+<meta content="Create colorful, whimsical art inspired by Moriah Elizabeth's style" property="og:description"/>
 <meta content="assets/img_1200x630_bd085ae3.png" property="og:image"/>
 <meta content="website" property="og:type"/>
 <link href="assets/img_32x32_4789083b.png" rel="icon"/>
@@ -170,7 +170,7 @@
 <!-- Loading Overlay -->
 <div id="loading-overlay">
 <div class="loading-spinner mb-4"></div>
-<p class="text-xl font-bold text-pink-500">Loading Mariah Elizabeth Art Creator...</p>
+<p class="text-xl font-bold text-pink-500">Loading Moriah Elizabeth Art Creator...</p>
 <p class="text-gray-600 mt-2">Get ready to create something awesome!</p>
 </div>
 <!-- Header -->
@@ -178,7 +178,7 @@
 <div class="container mx-auto px-4 flex justify-between items-center">
 <div class="flex items-center">
 <i aria-hidden="true" class="fas fa-paint-brush text-2xl mr-2"></i>
-<h1 class="text-2xl md:text-3xl font-bold">Mariah Elizabeth Art Creator</h1>
+<h1 class="text-2xl md:text-3xl font-bold">Moriah Elizabeth Art Creator</h1>
 </div>
 <div>
 <button class="bg-white text-pink-500 hover:bg-pink-100 px-4 py-2 rounded-full font-bold flex items-center" id="save-btn">
@@ -246,7 +246,7 @@
 <canvas class="w-full border border-gray-300 rounded-lg" id="drawing-canvas"></canvas>
 </div>
 <div class="mt-4 bg-white p-4 rounded-lg shadow-md">
-<h3 class="text-lg font-semibold text-gray-700 mb-2">Mariah Elizabeth Color Palette</h3>
+<h3 class="text-lg font-semibold text-gray-700 mb-2">Moriah Elizabeth Color Palette</h3>
 <div class="flex flex-wrap gap-2">
 <div class="color-swatch" data-color="#FF6B6B" style="background-color: #FF6B6B;"></div>
 <div class="color-swatch" data-color="#FFD93D" style="background-color: #FFD93D;"></div>
@@ -288,21 +288,13 @@
 <div class="pattern-btn rounded-lg border border-gray-200" data-index="3" style="background-image: url('https://cdn.simulationtheory.ai/gasset/?asset=img&amp;prompt=stars pattern&amp;w=100&amp;h=100&amp;transparent=true&amp;style=pixel_art')"></div>
 </div>
 </div>
-<div class="mt-6">
-<h2 class="text-xl font-bold text-pink-500 mb-4 flex items-center">
-<i aria-hidden="true" class="fas fa-magic mr-2"></i> AI Help
-                    </h2>
-<button class="w-full bg-gradient-to-r from-purple-400 to-pink-400 hover:from-purple-500 hover:to-pink-500 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center" id="ai-ideas-btn">
-<i aria-hidden="true" class="fas fa-lightbulb mr-2"></i> Get Ideas
-                    </button>
-</div>
 </div>
 </div>
 <!-- AI Ideas Modal -->
 <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden" id="ai-ideas-modal">
 <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
 <div class="flex justify-between items-center mb-4">
-<h3 class="text-xl font-bold text-pink-500">Mariah Elizabeth Style Ideas</h3>
+<h3 class="text-xl font-bold text-pink-500">Moriah Elizabeth Style Ideas</h3>
 <button class="text-gray-500 hover:text-gray-700 p-2" id="close-modal-btn">
 <i aria-hidden="true" class="fas fa-times"></i>
 </button>
@@ -341,7 +333,7 @@
 <div class="mb-4">
 <label class="block text-gray-700 mb-2">Font Style</label>
 <select class="w-full border border-gray-300 rounded-lg p-2" id="font-style">
-<option value="Comic Sans MS, cursive">Comic Sans (Mariah's Style)</option>
+<option value="Comic Sans MS, cursive">Comic Sans (Moriah's Style)</option>
 <option value="Arial, sans-serif">Arial</option>
 <option value="Georgia, serif">Georgia</option>
 <option value="Impact, fantasy">Impact</option>
@@ -355,8 +347,8 @@
 </main>
 <footer class="bg-gray-800 text-white py-4 mt-8">
 <div class="container mx-auto px-4 text-center">
-<p>Created with <i aria-hidden="true" class="fas fa-heart text-pink-500"></i> for Mariah Elizabeth fans</p>
-<p class="text-sm text-gray-400 mt-2">This app is inspired by Mariah Elizabeth's art style but is not affiliated with her.</p>
+<p>Created with <i aria-hidden="true" class="fas fa-heart text-pink-500"></i> for Moriah Elizabeth fans</p>
+<p class="text-sm text-gray-400 mt-2">This app is inspired by Moriah Elizabeth's art style but is not affiliated with her.</p>
 </div>
 </footer>
 <script>
@@ -690,7 +682,7 @@
             function saveArtwork() {
                 try {
                     const link = document.createElement('a');
-                    link.download = 'mariah-elizabeth-style-artwork.png';
+                    link.download = 'Moriah-elizabeth-style-artwork.png';
                     link.href = canvas.toDataURL('image/png');
                     link.click();
                     
@@ -702,7 +694,7 @@
                         toolsUsed: 'Drawing App'
                     };
                     
-                    window.save_data_to_csv('mariah_elizabeth_art_creations.csv', [artworkData]);
+                    window.save_data_to_csv('Moriah_elizabeth_art_creations.csv', [artworkData]);
                 } catch (error) {
                     console.error("Error saving artwork:", error);
                     alert("There was an error saving your artwork. Please try again.");
@@ -826,13 +818,13 @@
                 
                 // Call LLM for ideas
                 const systemPrompt = `
-                    You are an expert on Mariah Elizabeth's art style. Provide creative ideas for an art project in her style.
-                    Mariah Elizabeth is known for her colorful, whimsical designs, doodles, and transformations.
+                    You are an expert on Moriah Elizabeth's art style. Provide creative ideas for an art project in her style.
+                    Moriah Elizabeth is known for her colorful, whimsical designs, doodles, and transformations.
                     Include specific suggestions for colors, patterns, and design elements that match her style.
                     Format your response as a JSON object with these fields:
                     1. title: A catchy title for the art idea
                     2. description: A detailed description of the art concept (100-150 words)
-                    3. colors: An array of 4-6 specific hex color codes that match Mariah's style
+                    3. colors: An array of 4-6 specific hex color codes that match Moriah's style
                     4. elements: An array of 3-5 specific design elements to include
                     5. tips: 2-3 practical tips for creating this art
                 `;
@@ -840,7 +832,7 @@
                 const userMessages = [
                     {
                         "role": "user",
-                        "content": "Give me a creative Mariah Elizabeth inspired art idea"
+                        "content": "Give me a creative Moriah Elizabeth inspired art idea"
                     }
                 ];
                 
